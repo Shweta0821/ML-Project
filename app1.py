@@ -29,6 +29,8 @@ sexm = {'Female': 0, 'Male': 1}
 education_categorym = {'Assoc-acdm': 0, 'Assoc-voc': 1, 'Bachelors': 2, 'Doctorate': 3, 
                        'Elementary': 4, 'HS-grad': 5, 'Masters': 6, 'Middle School': 7, 
                        'Not HS-grad': 8, 'Prof-school': 9, 'Some-college': 10}
+workclass_mappingm= {'Federal-gov': 0, 'Local-gov': 1, 'Never-worked': 2, 'Private': 3, 'Self-emp-inc': 4, 'Self-emp-not-inc': 5, 
+             'State-gov': 6, 'Without-pay': 7}
 
 # Function to categorize age based on predefined bins
 def categorize_age(age):
@@ -58,6 +60,7 @@ hours_per_week = outlier_hours_per_week(hours_per_week)
 
 marital_status = st.selectbox("Select Marital Status:", list(marital_statusm.keys()))
 occupation = st.selectbox("Select Occupation:", list(occupation_mappingm.keys()))
+workclass = st.selectbox("Select Workclass:", list(workclass_mappingm.keys()))
 relationship = st.selectbox("Select Relationship Status:", list(relationshipm.keys()))
 sex = st.selectbox("Select Gender:", list(sexm.keys()))
 education_category = st.selectbox("Select Education Level:", list(education_categorym.keys()))
@@ -66,6 +69,7 @@ education_category = st.selectbox("Select Education Level:", list(education_cate
 age_groupe = age_groupm.get(age_group)
 marital_statuse = marital_statusm.get(marital_status)
 occupatione = occupation_mappingm.get(occupation)
+workclasse = workclass_mappingm.get(workclass)
 relationshipe = relationshipm.get(relationship)
 sexe = sexm.get(sex)
 education_categorye = education_categorym.get(education_category)
@@ -74,7 +78,7 @@ education_categorye = education_categorym.get(education_category)
 if st.button("Predict"):
     # Prepare final input array for the model
     final_features = np.array([hours_per_week, age_groupe, marital_statuse, 
-                               occupatione, relationshipe, education_categorye, sexe]).reshape(1, -1)
+                               occupatione,workclasse, relationshipe, education_categorye, sexe]).reshape(1, -1)
 
     # Make prediction
     prediction = model.predict(final_features)

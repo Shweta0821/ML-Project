@@ -132,13 +132,15 @@ df_imputed = pd.concat([df_not_missing, df_missing])
 
 adultDataFrame=df_imputed.copy()
 
-# Define X (features) and y (target)
-#X = adultDataFrame[['workclass', 'education_new', 'marital-status', 
- #                   'occupation', 'relationship', 'sex', 
-  #                  'age_group', 'hours-per-week']]
-X = adultDataFrame[['education_new', 'marital-status', 
-                    'occupation', 'relationship', 'sex', 
-                    'age_group', 'hours-per-week']]
+#Define X (features) and y (target)
+X = adultDataFrame[['workclass', 'education_new', 'marital-status', 
+                   'occupation', 'relationship', 'sex', 
+                   'age_group', 'hours-per-week']]
+# =============================================================================
+# X = adultDataFrame[['education_new', 'marital-status', 
+#                     'occupation', 'relationship', 'sex', 
+#                     'age_group', 'hours-per-week']]
+# =============================================================================
 y = adultDataFrame['income']
 
 # Split the data into training and testing sets

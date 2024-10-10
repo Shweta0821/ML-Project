@@ -25,7 +25,8 @@ relationshipm= {'Husband': 0, 'Not-in-family': 1, 'Other-relative': 2, 'Own-chil
                 'Unmarried': 4, 'Wife': 5}
 sexm={'Female': 0, 'Male': 1}
 education_categorym= {'Assoc-acdm': 0, 'Assoc-voc': 1, 'Bachelors': 2, 'Doctorate': 3, 'Elementary': 4, 'HS-grad': 5, 'Masters': 6, 'Middle School': 7, 'Not HS-grad': 8, 'Prof-school': 9, 'Some-college': 10}
-
+workclass_mappingm= {'Federal-gov': 0, 'Local-gov': 1, 'Never-worked': 2, 'Private': 3, 'Self-emp-inc': 4, 'Self-emp-not-inc': 5, 
+             'State-gov': 6, 'Without-pay': 7}
 
 # Function to categorize age based on predefined bins
 def categorize_age(age):
@@ -87,6 +88,7 @@ def predict():
         
     marital_status = request.form['marital-status']
     occupation = request.form['occupation']
+    workclass = request.form['workclass']
     relationship = request.form['relationship']
     
     education_category = request.form['education_new']
@@ -97,7 +99,8 @@ def predict():
     # Convert original values to encoded values (similar to previous steps)
     age_groupe = age_groupm[age_group]  
     marital_statuse = marital_statusm[marital_status]
-    occupatione = occupation_mappingm[occupation]   
+    occupatione = occupation_mappingm[occupation]
+    workclasse = workclass_mappingm[workclass]
     relationshipe = relationshipm[relationship]
     education_categorye = education_categorym[education_category]   
     sexe = sexm[sex]  
@@ -106,11 +109,12 @@ def predict():
                                age_groupe,
                                marital_statuse,
                                occupatione,
+                               workclasse,
                                  relationshipe,
                                  education_categorye,sexe]).reshape(1,-1)
     
     
-    final_features = np.array([marital_statuse, occupatione,relationshipe,
+    final_features = np.array([marital_statuse, occupatione,workclasse,relationshipe,
                                hours_per_week,
           sexe, age_groupe, education_categorye]).reshape(1,-1)
   
